@@ -1,0 +1,34 @@
+<h1>Sobe</h1>
+<hr />
+
+<form class="form-inline">
+  <div class="form-group">
+    <label for="kvadratura">Kvadratura: </label>
+    <input type="text" id="kvadratura" class="form-control" [(ngModel)]="filterKvadratura" (keyup)="0" />
+  </div>
+  <div class="form-group">
+    <label for="kreveti">Broj kreveta: </label>
+    <input type="text" id="kreveti" class="form-control" [(ngModel)]="filterKreveti" (keyup)="0" />
+  </div>
+</form>
+
+<br />
+
+<table class="table table-stripped">
+  <thead>
+    <tr>
+      <td><strong>NAZIV SOBE</strong></td>
+      <td><strong>BROJ KREVETA</strong></td>
+      <td><strong>VELIČINA SOBE</strong></td>
+      <TD><strong>TV</strong></TD>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let room of rooms | filterkvadratura: filterKvadratura | filterbrojkreveta: filterKreveti">
+      <td>{{room.ROOMNAME}}</td>
+      <td>{{room.BEDS}}</td>
+      <td>{{room.SIZE}}</td>
+      <td>{{room.TV == 1 ? 'IMA' : 'NEMA'}}</td>
+    </tr>
+  </tbody>
+</table>

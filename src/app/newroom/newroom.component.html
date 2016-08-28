@@ -1,0 +1,38 @@
+<h1>Dodaj novu sobu</h1>
+<hr />
+
+<div class="alert alert-success" role="alert" *ngIf="addedRoom == true">
+  Nova soba je uspešno dodata!
+</div>
+
+<div class="alert alert-danger" role="alert" *ngIf="isError()">
+  <strong>Greška! </strong> {{errorAddingRoom}}
+</div>
+
+<form (ngSubmit)="onSubmit()" #f="ngForm">
+  <div class="form-group">
+    <label for="roomname">Naziv sobe</label>
+    <input type="text" id="roomname" class="form-control" [(ngModel)]="room.roomname" #roomname />
+    <p *ngIf="!isValidRoomname()">Naziv sobe je invalidan.</p>
+  </div>
+  <div class="form-group">
+    <label for="beds">Broj kreveta</label>
+    <input type="number" id="beds" class="form-control" [(ngModel)]="room.beds" #beds />
+    <p *ngIf="!isValidBeds()">Broj kreveta je invalidan.</p>
+  </div>
+  <div class="form-group">
+    <label for="size">Veličina sobe</label>
+    <input type="text" id="size" class="form-control" [(ngModel)]="room.size" #size />
+    <p *ngIf="!isValidSize()">Veličina sobe je invalidna.</p>
+  </div>
+  <div class="form-group">
+    <label for="tv">Poseduje TV</label>
+    <select name="tv" id="tv" [(ngModel)]="room.tv" #tv>
+      <option value="1">Ima</option>
+      <option value="0">Nema</option>
+    </select>
+    <p *ngIf="!isValidTv()">Haha, televizor je invalidan.</p>
+  </div>
+
+  <button type="submit" class="btn btn-primary"(click)="0" >Dodaj sobu</button>
+</form>

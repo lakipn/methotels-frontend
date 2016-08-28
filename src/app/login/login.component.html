@@ -1,0 +1,17 @@
+<h1>
+  Ulogujte se
+</h1>
+
+<form (ngSubmit)="onSubmit(f)" #f="ngForm">
+  <div class="form-group">
+    <label for="username">Korisničko ime:</label>
+    <input type="text" class="form-control" id="username" [(ngModel)]="user.username" name="username" #fUsername required />
+    <p *ngIf="!isValidUsername(fUsername)">Invalidno korisničko ime</p>
+  </div>
+  <div class="form-group">
+    <label for="password">Lozinka:</label>
+    <input type="password" class="form-control" id="password" [(ngModel)]="user.password" name="password" #fPassword required />
+    <p *ngIf="!isValidPassword(fPassword)">Invalidna lozinka.</p>
+  </div>
+  <button type="submit" class="btn btn-primary" [disabled]="!( isValidUsername(fUsername) && isValidPassword(fPassword) )">Uloguj se</button>
+</form>
