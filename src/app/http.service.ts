@@ -51,6 +51,35 @@ export class HttpService {
     );
   }
 
+  modifyroom(room: any, id : number) {
+    const body = 'roomname=' + room.roomname + '&beds=' + room.beds + '&size=' + room.size + '&tv=' + room.tv + '&id=' + id;
+    console.log(body);
+    const headers = new Headers();
+    headers.append('Content-Type', 'application/x-www-form-urlencoded');
+    if(this.token != '')
+      headers.append('Token', this.token);
+
+    return this.http.post('http://localhost/methotels/backend/modifyroom.php', body, {
+      headers: headers
+    }).map(
+      (response: Response) => response.json()
+    );
+  }
+
+  deleteroom(id : number) {
+    const body = 'id=' + id;
+    const headers = new Headers();
+    headers.append('Content-Type', 'application/x-www-form-urlencoded');
+    if(this.token != '')
+      headers.append('Token', this.token);
+
+    return this.http.post('http://localhost/methotels/backend/deleteroom.php', body, {
+      headers: headers
+    }).map(
+      (response: Response) => response.json()
+    );
+  }
+
   allrooms() {
     const headers = new Headers();
     headers.append('Content-Type', 'application/x-www-form-urlencoded');

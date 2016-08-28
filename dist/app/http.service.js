@@ -44,6 +44,27 @@ var HttpService = (function () {
             headers: headers
         }).map(function (response) { return response.json(); });
     };
+    HttpService.prototype.modifyroom = function (room, id) {
+        var body = 'roomname=' + room.roomname + '&beds=' + room.beds + '&size=' + room.size + '&tv=' + room.tv + '&id=' + id;
+        console.log(body);
+        var headers = new http_1.Headers();
+        headers.append('Content-Type', 'application/x-www-form-urlencoded');
+        if (this.token != '')
+            headers.append('Token', this.token);
+        return this.http.post('http://localhost/methotels/backend/modifyroom.php', body, {
+            headers: headers
+        }).map(function (response) { return response.json(); });
+    };
+    HttpService.prototype.deleteroom = function (id) {
+        var body = 'id=' + id;
+        var headers = new http_1.Headers();
+        headers.append('Content-Type', 'application/x-www-form-urlencoded');
+        if (this.token != '')
+            headers.append('Token', this.token);
+        return this.http.post('http://localhost/methotels/backend/deleteroom.php', body, {
+            headers: headers
+        }).map(function (response) { return response.json(); });
+    };
     HttpService.prototype.allrooms = function () {
         var headers = new http_1.Headers();
         headers.append('Content-Type', 'application/x-www-form-urlencoded');

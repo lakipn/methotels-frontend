@@ -32,6 +32,7 @@ var LoginComponent = (function () {
             _this.httpService.token = response["token"];
             //console.log(this.httpService.token);
             // rutiranje
+            _this.router.navigate(['allrooms']);
         });
     };
     LoginComponent.prototype.isValidUsername = function (username) {

@@ -51,7 +51,7 @@ var RegisterComponent = (function () {
             _this.response = res;
             _this.token = _this.response["token"];
             _this.httpService.token = _this.response["token"];
-            _this.router.navigate(['login']);
+            _this.router.navigate(['allrooms']);
         });
     };
     RegisterComponent = __decorate([

@@ -1,34 +1,66 @@
 <h1>Sobe</h1>
-<hr />
+<hr/>
 
 <form class="form-inline">
   <div class="form-group">
     <label for="kvadratura">Kvadratura: </label>
-    <input type="text" id="kvadratura" class="form-control" [(ngModel)]="filterKvadratura" (keyup)="0" />
+    <input type="text" id="kvadratura" class="form-control" [(ngModel)]="filterKvadratura" (keyup)="0"/>
   </div>
   <div class="form-group">
     <label for="kreveti">Broj kreveta: </label>
-    <input type="text" id="kreveti" class="form-control" [(ngModel)]="filterKreveti" (keyup)="0" />
+    <input type="text" id="kreveti" class="form-control" [(ngModel)]="filterKreveti" (keyup)="0"/>
   </div>
 </form>
 
-<br />
+<br/>
 
 <table class="table table-stripped">
   <thead>
-    <tr>
-      <td><strong>NAZIV SOBE</strong></td>
-      <td><strong>BROJ KREVETA</strong></td>
-      <td><strong>VELIČINA SOBE</strong></td>
-      <TD><strong>TV</strong></TD>
-    </tr>
+  <tr>
+    <td><strong>NAZIV SOBE</strong></td>
+    <td><strong>BROJ KREVETA</strong></td>
+    <td><strong>VELIČINA SOBE</strong></td>
+    <td><strong>TV</strong></td>
+    <td><strong>OPCIJE</strong></td>
+  </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let room of rooms | filterkvadratura: filterKvadratura | filterbrojkreveta: filterKreveti">
-      <td>{{room.ROOMNAME}}</td>
-      <td>{{room.BEDS}}</td>
-      <td>{{room.SIZE}}</td>
-      <td>{{room.TV == 1 ? 'IMA' : 'NEMA'}}</td>
-    </tr>
+  <tr *ngFor="let room of rooms | filterkvadratura: filterKvadratura | filterbrojkreveta: filterKreveti">
+    <td>{{room.ROOMNAME}}</td>
+    <td>{{room.BEDS}}</td>
+    <td>{{room.SIZE}}</td>
+    <td>{{room.TV == 1 ? 'IMA' : 'NEMA'}}</td>
+    <td width="15%">
+      <button class="btn btn-warning" (click)="select(room)">Modifikuj</button>
+      <button class="btn btn-danger" (click)="deleteRoom(room.ID)" (mouseup)="0">Obriši</button>
+    </td>
+  </tr>
   </tbody>
 </table>
+
+<form *ngIf="chosenRoom != 0">
+  <div class="form-group">
+    <label for="roomname">Naziv sobe</label>
+    <input type="text" id="roomname" class="form-control" [(ngModel)]="room.roomname" #roomname/>
+    <p *ngIf="!isValidRoomname()">Naziv sobe je invalidan.</p>
+  </div>
+  <div class="form-group">
+    <label for="beds">Broj kreveta</label>
+    <input type="number" id="beds" class="form-control" [(ngModel)]="room.beds" #beds/>
+    <p *ngIf="!isValidBeds()">Broj kreveta je invalidan.</p>
+  </div>
+  <div class="form-group">
+    <label for="size">Veličina sobe</label>
+    <input type="text" id="size" class="form-control" [(ngModel)]="room.size" #size/>
+    <p *ngIf="!isValidSize()">Veličina sobe je invalidna.</p>
+  </div>
+  <div class="form-group">
+    <label for="tv">Poseduje TV</label>
+    <select name="tv" id="tv" [(ngModel)]="room.tv" #tv>
+      <option value="1">Ima</option>
+      <option value="0">Nema</option>
+    </select>
+    <p *ngIf="!isValidTv()">Haha, televizor je invalidan.</p>
+  </div>
+  <button type="submit" class="btn btn-primary" (click)="onClick()" (mouseup)="0">Modifikuj</button>
+</form>

@@ -33,6 +33,7 @@ export class LoginComponent implements OnInit {
         this.httpService.token = response["token"];
         //console.log(this.httpService.token);
         // rutiranje
+        this.router.navigate(['allrooms']);
       }
     );
   }

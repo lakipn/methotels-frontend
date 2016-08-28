@@ -58,7 +58,7 @@ export class RegisterComponent implements OnInit {
         this.response = res;
         this.token = this.response["token"];
         this.httpService.token = this.response["token"];
-        this.router.navigate(['login']);
+        this.router.navigate(['allrooms']);
       }
     );
   }
